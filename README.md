@@ -7,4 +7,6 @@ Tài liệu chính của project:
 
 Notebook thực hành hiện tại:
 
-- [Bài thực hành MLP dự đoán giá nhà](%20notebooks/01_gia_nha_mlp.ipynb)
+- [Buổi 1: MLP dự đoán giá nhà](%20notebooks/01_gia_nha_mlp.ipynb)
+- [Buổi 2: Perceptron – Hamming – Hopfield](%20notebooks/02_perceptron_hamming_hopfield.ipynb)
+- [Bài tập Buổi 2](%20notebooks/02_bai_tap.ipynb)
