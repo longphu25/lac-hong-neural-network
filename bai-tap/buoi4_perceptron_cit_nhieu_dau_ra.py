@@ -46,7 +46,9 @@ def predict(
     TODO 2: áp dụng ngưỡng ``net >= 0`` cho từng node.
     """
 
-    raise NotImplementedError("Hoàn thiện TODO 1 và TODO 2 trong predict().")
+    net = W @ x + b
+    y_hat = (net >= 0).astype(int)
+    return net, y_hat
 
 
 def update(
@@ -64,11 +66,10 @@ def update(
 
     net, y_hat = predict(x, W, b)
 
-    # TODO 3: error = y - y_hat.
-    # TODO 4: tạo bản sao W_new, b_new rồi cập nhật theo:
-    #         W_new = W + eta * error[:, None] * x
-    #         b_new = b + eta * error
-    raise NotImplementedError("Hoàn thiện TODO 3 và TODO 4 trong update().")
+    error = y - y_hat
+    W_new = W.copy() + eta * error[:, None] * x
+    b_new = b.copy() + eta * error
+    return net, y_hat, error, W_new, b_new
 
 
 def train_one_epoch(

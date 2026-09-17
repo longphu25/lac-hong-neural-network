@@ -24,13 +24,10 @@ ETA = 0.5
 W0 = np.zeros(X.shape[1], dtype=float)
 B0 = -0.25
 
-
 def predict(x: np.ndarray, w: np.ndarray, b: float) -> tuple[float, int]:
-    """Trả về net và nhãn dự đoán theo ngưỡng net >= 0."""
-    # TODO 1: tính net = w dot x + b.
-    # TODO 2: tính y_hat bằng hàm ngưỡng rồi trả về (net, y_hat).
-    raise NotImplementedError("Hoàn thiện TODO 1 và TODO 2 trong predict().")
-
+    net = float(np.dot(w, x) + b)
+    y_hat = int(net >= 0)
+    return net, y_hat
 
 def update(
     x: np.ndarray,
@@ -39,13 +36,11 @@ def update(
     b: float,
     eta: float,
 ) -> tuple[float, int, int, np.ndarray, float]:
-    """Thực hiện một lượt dự đoán và cập nhật Perceptron."""
     net, y_hat = predict(x, w, b)
-
-    # TODO 3: tính error = y - y_hat, sau đó tạo w_new và b_new.
-    # Gợi ý: không sửa trực tiếp mảng w được truyền vào hàm.
-    raise NotImplementedError("Hoàn thiện TODO 3 trong update().")
-
+    error = y - y_hat
+    w_new = w + eta * error * x
+    b_new = b + eta * error
+    return net, y_hat, error, w_new, b_new
 
 def train_one_epoch(eta: float = ETA) -> tuple[np.ndarray, float, list[dict[str, object]]]:
     """Chạy đúng một epoch theo thứ tự C, I, T và lưu lịch sử từng lượt."""
