@@ -91,10 +91,10 @@ def bai_a() -> dict:
     result = {}
     for i, j in pairs:
         # TODO: tính tích xi_i * xi_j trên từng ký hiệu UP, LEFT, CROSS rồi cộng lại
-        tich_UP = ...    # TODO: get_value("UP", i) * get_value("UP", j)
-        tich_LEFT = ...  # TODO: get_value("LEFT", i) * get_value("LEFT", j)
-        tich_CROSS = ... # TODO: get_value("CROSS", i) * get_value("CROSS", j)
-        w_ij = ...        # TODO: tổng ba tích trên
+        tich_UP = get_value("UP", i) * get_value("UP", j)  # TODO: get_value("UP", i) * get_value("UP", j)
+        tich_LEFT = get_value("LEFT", i) * get_value("LEFT", j)  # TODO: get_value("LEFT", i) * get_value("LEFT", j)
+        tich_CROSS = get_value("CROSS", i) * get_value("CROSS", j) # TODO: get_value("CROSS", i) * get_value("CROSS", j)
+        w_ij = tich_UP + tich_LEFT + tich_CROSS        # TODO: tổng ba tích trên
         result[(i, j)] = w_ij
     return result
 
@@ -121,18 +121,18 @@ def bai_b() -> np.ndarray:
     """Tạo input nhiễu, tính net, vá tuần tự ô 6 rồi ô 14. Trả về x sau khi vá."""
     x0 = PATTERNS["LEFT"].copy()
     # TODO: lật ô 6 (chỉ số 0-based: 5) và ô 14 (chỉ số 0-based: 13)
-    x0[...] *= -1  # TODO: ô 6
-    x0[...] *= -1  # TODO: ô 14
+    x0[5] *= -1  # TODO: ô 6
+    x0[13] *= -1  # TODO: ô 14
 
     # TODO: tính net cho ô 6 và ô 14 trên x0 (trước khi vá) — chỉ để quan sát
-    net_6 = ...   # TODO: W[5] @ x0
-    net_14 = ...  # TODO: W[13] @ x0
+    net_6 = W[5] @ x0   # TODO: W[5] @ x0
+    net_14 = W[13] @ x0  # TODO: W[13] @ x0
     print(f"  net_6 = {net_6}, net_14 = {net_14}")
 
     x_result = x0.copy()
     # TODO: vá tuần tự — ô 6 trước, dùng x_result đã đổi để tính net cho ô 14
-    x_result[5] = ...   # TODO: sign(W[5] @ x_result, x_result[5])
-    x_result[13] = ...  # TODO: sign(W[13] @ x_result, x_result[13])
+    x_result[5] = sign(W[5] @ x_result, x_result[5])   # TODO: sign(W[5] @ x_result, x_result[5])
+    x_result[13] = sign(W[13] @ x_result, x_result[13])  # TODO: sign(W[13] @ x_result, x_result[13])
     return x_result
 
 
@@ -152,14 +152,14 @@ def bai_c() -> tuple:
     """Trả về (E_truoc, E_sau, x_sau_khi_va) khi vá ô 6 của CROSS bị lật."""
     x_c = PATTERNS["CROSS"].copy()
     # TODO: lật ô 6 (chỉ số 0-based: 5)
-    x_c[...] *= -1  # TODO
+    x_c[5] *= -1  # TODO
 
-    E_before = ...  # TODO: energy(W, x_c)
+    E_before = energy(W, x_c)  # TODO: energy(W, x_c)
 
-    net_6 = ...     # TODO: W[5] @ x_c
-    x_c[5] = ...    # TODO: sign(net_6, x_c[5])
+    net_6 = W[5] @ x_c     # TODO: W[5] @ x_c
+    x_c[5] = sign(net_6, x_c[5])    # TODO: sign(net_6, x_c[5])
 
-    E_after = ...   # TODO: energy(W, x_c)
+    E_after = energy(W, x_c)   # TODO: energy(W, x_c)
 
     return E_before, E_after, x_c
 
@@ -191,10 +191,10 @@ def check_bai_c() -> None:
 def bai_d() -> dict:
     """Trả về dict {so_thu_tu: "Hamming" | "Hopfield"}."""
     return {
-        1: ...,  # TODO: "Hamming" hoặc "Hopfield"
-        2: ...,  # TODO
-        3: ...,  # TODO
-        4: ...,  # TODO
+        1: "Hamming",  # TODO: "Hamming" hoặc "Hopfield"
+        2: "Hopfield",  # TODO
+        3: "Hopfield",  # TODO
+        4: "Hamming",  # TODO
     }
 
 
